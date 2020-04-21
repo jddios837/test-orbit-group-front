@@ -1,0 +1,105 @@
+<div id="student">
+
+  <!-- CENTER -->
+  <div class="center">
+    <div class="content">
+      <form name="studentForm" [formGroup]="studentForm"  fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>User Name</mat-label>
+              <input matInput placeholder="User Name"
+                  name="UserName"
+                  formControlName="UserName"
+                  required>
+              <mat-error *ngIf="inputControl('UserName').invalid && (inputControl('UserName').dirty || inputControl('UserName').touched)">
+                  <span *ngIf="inputControl('UserName').errors.required">UserName required!</span>
+                  <span *ngIf="inputControl('UserName').errors.userNameExist">This UserName already exists</span>
+              </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="First Name"
+                  name="FirstName"
+                  formControlName="FirstName"
+                  required>
+              <mat-error *ngIf="inputControl('FirstName').invalid && (inputControl('FirstName').dirty || inputControl('FirstName').touched)">
+                <span *ngIf="inputControl('FirstName').errors.required">First Name required!</span>
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Last Name"
+                  name="LastName"
+                  formControlName="LastName"
+                  required>
+              <mat-error *ngIf="inputControl('LastName').invalid && (inputControl('LastName').dirty || inputControl('LastName').touched)">
+                <span *ngIf="inputControl('LastName').errors.required">Last Name required!</span>
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Age</mat-label>
+              <input matInput placeholder="Age"
+                  type="number"
+                  min="10"
+                  step="1"
+                  name="Age"
+                  formControlName="Age"
+                  required>
+              <mat-error *ngIf="inputControl('Age').invalid && (inputControl('Age').dirty || inputControl('Age').touched)">
+                <span *ngIf="inputControl('Age').errors?.pattern">Only numbers!</span>
+                <span *ngIf="inputControl('Age').errors.required">Age required!</span>
+
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+              <mat-label>Careers</mat-label>
+              <mat-select formControlName="Career" required>
+                  <mat-option
+                      *ngFor="let opt of careers"
+                      [value]="opt">
+                      {{opt}}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="inputControl('Career').invalid && (inputControl('Career').dirty || inputControl('Career').touched)">
+                <span *ngIf="inputControl('Career').errors.required">Career required!</span>
+              </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <button mat-button
+              (click)="dialogRef.close()">
+            <span>Close</span>
+          </button>
+
+          <button mat-button
+            *ngIf="action == 'edit'"
+            [disabled]="studentForm.invalid"
+            (click)="dialogRef.close(studentForm)">
+            <span>Update</span>
+          </button>
+
+          <button mat-button
+              *ngIf="action == 'new'"
+              [disabled]="studentForm.invalid"
+              (click)="dialogRef.close(studentForm)">
+            <span>Add</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button color="primary" class="btn-add" (click)="addNewStudent()" >
+    Add Student
+  </button>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center">
+  <table mat-table [dataSource]="students">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Age </th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="career">
+      <th mat-header-cell *matHeaderCellDef> Career </th>
+      <td mat-cell *matCellDef="let element"> {{element.career}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef> Options </th>
+      <td mat-cell *matCellDef="let element; let i = index; let isLast=last">
+        <button mat-raised-button color="warn" class="btn-delete" (click)="deleteStudent(element.id)" >
+          Eliminar
+        </button>
+        <button mat-raised-button color="accent" (click)="editStudent(element.id)">
+          Editar
+        </button>
+        <!-- <button class="mt-0 button-icon-custom" mat-icon-button aria-label="Close dialog">
+          <mat-icon *ngIf="!element.invalid">check</mat-icon>
+          <mat-icon *ngIf="element.invalid">error_outline</mat-icon>
+        </button>
+        <button *ngIf="candidatesLength > 1" class="mt-0 button-icon-custom" mat-icon-button (click)="removeCandidate(element, i)"
+          aria-label="Close dialog">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button *ngIf="isLast" class="mt-0 button-icon-custom" mat-icon-button (click)="addCandidate(element)" aria-label="Close dialog"
+          [disabled]="element.invalid">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button> -->
+      </td>
+    </ng-container>
+
+    <!-- <thead>
+      <tr>
+        <th>Id</th>
+        <th>User Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Carrer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students | async">
+        <td>{{student.id}}</td>
+        <td>{{student.userName}}</td>
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.career}}</td>
+        <td>
+            <button mat-raised-button color="warn" class="btn-delete" (click)="deleteStudent(student.id)" >
+              Eliminar
+            </button>
+            <button mat-raised-button color="accent" (click)="editStudent(student.id)">
+              Editar
+            </button>
+        </td>
+      </tr>
+    </tbody> -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
